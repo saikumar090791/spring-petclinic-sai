@@ -1,0 +1,27 @@
+pipeline{
+agent any
+tools{
+maven 'maven'
+}
+triggers {
+cron('H * * * *')
+}
+
+stages{
+stage('git checkout'){
+steps{
+git url: 'https://github.com/bobbyande165/spring-petclinic-nithin.git',
+branch:'main'
+}
+}
+stage('Build'){
+steps{
+sh 'mvn compile'
+}
+}
+stage('Test'){
+steps{
+sh 'mvn test'
+}
+}
+}
